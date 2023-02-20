@@ -34,7 +34,6 @@
   .stage {
     display: flex;
     align-items: center;
-    transform: translateX(-4em);
     gap: 0.5em;
 
     .stageCircle {
@@ -61,6 +60,7 @@
   }
 
   .cross {
+    margin-left: 6em;
     cursor: pointer;
 
     .crossIcon {

@@ -1,0 +1,84 @@
+@import "src/assets/styles/colorPalette";
+
+.stage1 {
+
+  .mainBlock {
+    width: 28.5em;
+    margin: 3em auto 0;
+
+    h1 {
+      font-family: Poppins, serif;
+      font-size: 2rem;
+      font-weight: bold;
+      line-height: 1.13;
+      color: $charade;
+    }
+
+    .desc {
+      font-family: Roboto, serif;
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.38;
+      margin-top: 1em;
+      color: $shuttleGray;
+    }
+
+    .alert {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 1em;
+      padding: 1em;
+      border-radius: 0.5em;
+      background-color: $athensGray;
+      gap: 1em;
+
+      .lockIcon {
+        font-size: 1em;
+        color: $raven;
+      }
+
+      > p {
+        font-family: Poppins, serif;
+        font-size: 0.75rem;
+        line-height: 1.38;
+        color: $shark;
+      }
+
+      .cross {
+        cursor: pointer;
+
+        .crossIcon {
+          font-size: 1em;
+          transition: color 0.3s ease-in-out;
+          color: $raven;
+
+          &:hover {
+            color: $charade;
+          }
+        }
+      }
+    }
+
+    .phoneWrapper {
+      margin-top: 2em;
+
+      .countryCode {
+        font-family: Roboto, serif;
+        width: 5.5em;
+        height: 2.5em;
+
+        div:first-child {
+
+          border-bottom: 1px solid $iron;
+        }
+      }
+    }
+
+    .submitButton {
+      margin-top: 2em;
+    }
+  }
+}
+

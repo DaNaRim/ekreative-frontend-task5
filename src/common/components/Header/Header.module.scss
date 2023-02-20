@@ -1,0 +1,76 @@
+@import "src/assets/styles/colorPalette";
+
+@mixin activeStage {
+  border: none;
+  background: $azureRadiance;
+}
+
+
+.main_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 3em;
+
+  .logo {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 1.5em;
+      aspect-ratio: 1 / 1;
+    }
+
+    h2 {
+      font-family: Raleway, serif;
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: 1.13;
+      margin-left: 1em;
+      color: $charade;
+    }
+  }
+
+  .stage {
+    display: flex;
+    align-items: center;
+    transform: translateX(-4em);
+    gap: 0.5em;
+
+    .stageCircle {
+      width: 0.875em;
+      border: 1px solid $frenchGray;
+      border-radius: 50%;
+      background: transparent;
+      aspect-ratio: 1 / 1;
+
+      &.active {
+        @include activeStage;
+      }
+    }
+
+    .stageLine {
+      width: 2.5em;
+      height: 1px;
+      background: $frenchGray;
+
+      &.active {
+        @include activeStage;
+      }
+    }
+  }
+
+  .cross {
+    cursor: pointer;
+
+    .crossIcon {
+      font-size: 1.875em;
+      transition: color 0.3s ease-in-out;
+      color: $iron;
+
+      &:hover {
+        color: $charade;
+      }
+    }
+  }
+}

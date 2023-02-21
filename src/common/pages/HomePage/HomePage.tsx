@@ -31,6 +31,10 @@ const HomePage: React.FC = () => {
         setStage(3)
     }
 
+    const backToStage1 = () => {
+        setStage(1)
+    }
+
     return (
         <main className={styles.home}>
             <Header stage={stage}/>
@@ -42,9 +46,13 @@ const HomePage: React.FC = () => {
                 </p>
                 {alertOpen && <Alert closeAlert={closeAlert}/>}
 
-                {stage === 1 && <Stage1 handleComplete={handleStage1}/>}
-                {stage === 2 &&
-                  <Stage2 countryCode={countryCode} phone={phoneNumber} handleComplete={handleStage2}/>
+                {stage === 1 && <Stage1 handleComplete={handleStage1}
+                                        countryCode={countryCode}
+                                        phoneNumber={phoneNumber}/>}
+                {stage === 2 && <Stage2 handleComplete={handleStage2}
+                                        countryCode={countryCode}
+                                        phone={phoneNumber}
+                                        backToStage1={backToStage1}/>
                 }
             </div>
         </main>

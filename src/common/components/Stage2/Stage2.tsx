@@ -7,12 +7,13 @@ type Stage2Props = {
     countryCode: string,
     phone: string,
     handleComplete: () => void
+    backToStage1: () => void
 }
 
 const RIGHT_CODE: number = 1234
 const CODE_LENGTH: number = 4
 
-const Stage2 = ({countryCode, phone, handleComplete}: Stage2Props) => {
+const Stage2 = ({countryCode, phone, handleComplete, backToStage1}: Stage2Props) => {
 
     const {register, handleSubmit, setError, setValue, formState: {errors}} = useForm<{code: string}>()
 
@@ -51,7 +52,7 @@ const Stage2 = ({countryCode, phone, handleComplete}: Stage2Props) => {
                     <h2>{transformPhoneNumber()}</h2>
                     <p>Number not confirmed yet</p>
                 </div>
-                <button>
+                <button onClick={backToStage1}>
                     <FontAwesomeIcon className={styles.penIcon} icon={faPen}/>
                 </button>
             </div>

@@ -1,4 +1,4 @@
-import React, {useMemo} from "react"
+import React, {useCallback, useEffect, useMemo} from "react"
 import {Controller, useForm} from "react-hook-form"
 import {Data, MyComboBox} from "../form/MyComboBox/MyComboBox"
 import {countryCodes} from "./countryCodes"
@@ -10,10 +10,12 @@ type Stage1Fields = {
 }
 
 type Stage1Props = {
+    countryCode?: string,
+    phoneNumber?: string,
     handleComplete: (countryCode: string, phoneNumber: string) => void
 }
 
-const Stage1 = ({handleComplete}: Stage1Props) => {
+const Stage1 = ({countryCode, phoneNumber, handleComplete}: Stage1Props) => {
     const {register, control, handleSubmit, setValue, formState: {errors}} = useForm<Stage1Fields>()
 
     const transformedCountryCodes = useMemo(() => (
@@ -24,7 +26,9 @@ const Stage1 = ({handleComplete}: Stage1Props) => {
         } as Data))
     ), [])
 
-    const transformPhoneNumber = (phoneNumber: string) => {
+    const defaultCountryCode = countryCode || transformedCountryCodes[0].value
+
+    const transformPhoneNumber = useCallback((phoneNumber: string) => {
         const phone = phoneNumber.replaceAll(" ", "")
                                  .replace(/\D/g, "")
 
@@ -41,7 +45,11 @@ const Stage1 = ({handleComplete}: Stage1Props) => {
             + `${fifthPart ? ` ${fifthPart}` : ""}`
 
         setValue("phoneNumber", result)
-    }
+    }, [setValue])
+
+    useEffect(() => {
+        transformPhoneNumber(phoneNumber || "")
+    }, [phoneNumber, setValue, transformPhoneNumber])
 
     const handleStage1 = (data: Stage1Fields) => {
         const phone = data.phoneNumber.replaceAll(" ", "")
@@ -57,7 +65,7 @@ const Stage1 = ({handleComplete}: Stage1Props) => {
                     <Controller
                         name="countryCode"
                         control={control}
-                        defaultValue={transformedCountryCodes[0].value}
+                        defaultValue={defaultCountryCode}
                         render={({field}) => <MyComboBox {...field}
                                                          data={transformedCountryCodes}
                                                          className={styles.countryCode}/>}

@@ -1,3 +1,5 @@
+@import "colorPalette";
+
 @mixin clearButtonStyles {
   padding: 0;
   margin: 0;
@@ -8,4 +10,40 @@
   color: inherit;
   text-align: inherit;
   cursor: pointer;
+}
+
+@mixin fieldsetBox {
+  padding: 2em;
+  border: solid 1px $iron;
+  border-radius: 0.5em;
+}
+
+@mixin input {
+  font-family: Roboto, serif;
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+  border: none;
+  border-bottom: 1px solid $iron;
+  outline: none;
+  color: $shuttleGray;
+
+  &:focus {
+    border-bottom: 1px solid $azureRadiance;
+  }
+
+  &::placeholder {
+    opacity: 0.8;
+  }
+}
+
+@mixin button {
+  font-family: Poppins, serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 0.75em 1.5em;
+  border: 1px solid $silverSand;
+  border-radius: 0.25em;
+  background-color: white;
 }

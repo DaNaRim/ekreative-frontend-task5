@@ -26,6 +26,7 @@ const Stage1 = ({handleComplete}: Stage1Props) => {
 
     const transformPhoneNumber = (phoneNumber: string) => {
         const phone = phoneNumber.replaceAll(" ", "")
+                                 .replace(/\D/g, "")
 
         const firstPart = phone.slice(0, 2)
         const secondPart = phone.slice(2, 5)
@@ -49,29 +50,28 @@ const Stage1 = ({handleComplete}: Stage1Props) => {
     }
 
     return (
-        <section className={styles.stage1}>
-            <form onSubmit={handleSubmit(handleStage1)}>
-                <fieldset className={styles.phoneSet}>
-                    <p className={styles.formDesc}>Enter your phone number</p>
-                    <div className={styles.phoneWrapper}>
-                        <Controller
-                            name="countryCode"
-                            control={control}
-                            defaultValue={transformedCountryCodes[0].value}
-                            render={({field}) => <MyComboBox {...field}
-                                                             data={transformedCountryCodes}
-                                                             className={styles.countryCode}/>}
-                        />
-                        <input type="tel"
-                               {...register("phoneNumber", {required: true})}
-                               placeholder="555 555-1234"
-                               onChange={e => transformPhoneNumber(e.target.value)}/>
-                    </div>
-                    {errors.phoneNumber && <p className={styles.error}>Phone number is required</p>}
-                </fieldset>
-                <button type="submit" className={styles.submitButton}>Send code</button>
-            </form>
-        </section>
+        <form className={styles.stage1} onSubmit={handleSubmit(handleStage1)}>
+            <fieldset className={styles.phoneSet}>
+                <p className={styles.formDesc}>Enter your phone number</p>
+                <div className={styles.phoneWrapper}>
+                    <Controller
+                        name="countryCode"
+                        control={control}
+                        defaultValue={transformedCountryCodes[0].value}
+                        render={({field}) => <MyComboBox {...field}
+                                                         data={transformedCountryCodes}
+                                                         className={styles.countryCode}/>}
+                    />
+                    <input type="tel"
+                           {...register("phoneNumber", {required: true, pattern: /^\d+/})}
+                           placeholder="555 555-1234"
+                           onChange={e => transformPhoneNumber(e.target.value)}/>
+                </div>
+                {errors.phoneNumber?.type === "required" && <p className={styles.error}>Phone number is required</p>}
+                {errors.phoneNumber?.type === "pattern" && <p className={styles.error}>Phone number is invalid</p>}
+            </fieldset>
+            <button type="submit" className={styles.submitButton}>Send code</button>
+        </form>
     )
 }
 

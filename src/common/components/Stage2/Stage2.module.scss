@@ -1,0 +1,98 @@
+@import "src/assets/styles/colorPalette";
+@import "src/assets/styles/templates";
+
+.phoneBox {
+  @include fieldsetBox;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2em;
+  padding: 1em;
+
+  .leftWrapper {
+
+    h2 {
+      font-family: Roboto, serif;
+      font-size: 1.125rem;
+      font-weight: normal;
+      line-height: 1.56;
+      color: $shark;
+    }
+
+    p {
+      font-family: Poppins, serif;
+      font-size: 0.875rem;
+      line-height: 1.38;
+      margin-top: 0.125em;
+      color: $shuttleGray;
+    }
+  }
+
+  > button {
+    @include clearButtonStyles;
+
+    .penIcon {
+      color: $azureRadiance;
+    }
+  }
+}
+
+.codeForm {
+  margin-top: 2em;
+
+
+  .codeWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .leftSide {
+      h2 {
+        font-family: Poppins, serif;
+        font-size: 0.875rem;
+        line-height: 1.38;
+        text-align: left;
+        color: $shark;
+      }
+
+      > input {
+        @include input;
+        font-size: 1.5rem;
+        width: 10em;
+        margin-top: 0.5em;
+        padding: 0.5em;
+        letter-spacing: 0.25em;
+      }
+
+      p {
+        font-family: Poppins, serif;
+        font-size: 0.75rem;
+        line-height: 1.33;
+        margin-top: 0.5em;
+        color: $shuttleGray;
+      }
+    }
+
+    .sendAgain {
+      color: $azureRadiance;
+
+      span {
+        font-family: Roboto, serif;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.5;
+        margin-left: 0.5em;
+      }
+    }
+  }
+
+  .error {
+    margin-top: 0.5em;
+    color: red;
+  }
+
+  .submitButton {
+    @include button;
+    margin-top: 2em;
+  }
+}

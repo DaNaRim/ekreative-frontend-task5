@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import React, {useState} from "react"
 import Header from "../../components/Header/Header"
 import Stage1 from "../../components/Stage1/Stage1"
+import Stage2 from "../../components/Stage2/Stage2"
 import styles from "./HomePage.module.scss"
 
 type Stages = 1 | 2 | 3
@@ -26,6 +27,10 @@ const HomePage: React.FC = () => {
         setStage(2)
     }
 
+    const handleStage2 = () => {
+        setStage(3)
+    }
+
     return (
         <main className={styles.home}>
             <Header stage={stage}/>
@@ -36,8 +41,11 @@ const HomePage: React.FC = () => {
                     All you need is a phone number and e-mail
                 </p>
                 {alertOpen && <Alert closeAlert={closeAlert}/>}
+
                 {stage === 1 && <Stage1 handleComplete={handleStage1}/>}
-                {stage === 2 && <h1>Yes</h1>}
+                {stage === 2 &&
+                  <Stage2 countryCode={countryCode} phone={phoneNumber} handleComplete={handleStage2}/>
+                }
             </div>
         </main>
     )

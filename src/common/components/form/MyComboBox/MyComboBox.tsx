@@ -92,6 +92,7 @@ const OptionEntity = ({dataEntity}: OptionEntityProps) => (
         {({selected}) => (
             <>
                 <span className={`${styles.optionText} ${selected ? styles.selected : ""}`}>
+                  {/* TODO: maybe add props to display only name or value */}
                   <span>{dataEntity.value}</span>
                   <span>{dataEntity.name}</span>
                 </span>

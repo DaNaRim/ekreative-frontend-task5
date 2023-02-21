@@ -1,10 +1,10 @@
 @import "src/assets/styles/colorPalette";
+@import "src/assets/styles/templates";
 
 @mixin activeStage {
   border: none;
   background: $azureRadiance;
 }
-
 
 .main_header {
   display: flex;
@@ -27,8 +27,8 @@
       font-weight: bold;
       line-height: 1.13;
       margin-left: 1em;
-      color: $charade;
       text-transform: uppercase;
+      color: $charade;
     }
   }
 
@@ -61,6 +61,7 @@
   }
 
   .cross {
+    @include clearButtonStyles;
     margin-left: 6em;
     cursor: pointer;
 

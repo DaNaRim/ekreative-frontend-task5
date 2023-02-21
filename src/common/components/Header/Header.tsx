@@ -24,15 +24,15 @@ const Header: React.FC<HeaderProps> = ({stage}) => {
                 <h2>Company name</h2>
             </div>
             <div className={styles.stage}>
-                <div className={`${styles.stageCircle} ${stage === 1 ? styles.active : ""}`}></div>
-                <div className={`${styles.stageLine} ${stage === 2 ? styles.active : ""}`}></div>
-                <div className={`${styles.stageCircle} ${stage === 2 ? styles.active : ""}`}></div>
+                <div className={`${styles.stageCircle} ${stage >= 1 ? styles.active : ""}`}></div>
+                <div className={`${styles.stageLine} ${stage >= 2 ? styles.active : ""}`}></div>
+                <div className={`${styles.stageCircle} ${stage >= 2 ? styles.active : ""}`}></div>
                 <div className={`${styles.stageLine} ${stage === 3 ? styles.active : ""}`}></div>
                 <div className={`${styles.stageCircle} ${stage === 3 ? styles.active : ""}`}></div>
             </div>
-            <div className={styles.cross} role="button" tabIndex={0} onClick={handleCrossClick}>
+            <button className={styles.cross} onClick={handleCrossClick}>
                 <FontAwesomeIcon className={styles.crossIcon} icon={faXmark}/>
-            </div>
+            </button>
         </header>
     )
 }

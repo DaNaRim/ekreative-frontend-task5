@@ -1,11 +1,8 @@
-import {library} from "@fortawesome/fontawesome-svg-core"
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import React from "react"
 import logo from "../../../assets/icons/logo.png"
 import styles from "./Header.module.scss"
-
-library.add(faXmark)
 
 type HeaderProps = {
     stage: 1 | 2 | 3

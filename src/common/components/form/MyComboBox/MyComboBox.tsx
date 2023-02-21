@@ -1,12 +1,9 @@
-import {library} from "@fortawesome/fontawesome-svg-core"
 import {faCaretDown, faCheck} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {Combobox, Transition} from "@headlessui/react"
 import React, {Fragment, useState} from "react"
 import {ControllerRenderProps} from "react-hook-form"
 import styles from "./MyComboBox.module.scss"
-
-library.add(faCaretDown, faCheck)
 
 export interface Data {
     id: string

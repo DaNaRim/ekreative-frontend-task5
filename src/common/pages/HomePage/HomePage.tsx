@@ -1,39 +1,48 @@
-import {faLock, faXmark} from "@fortawesome/free-solid-svg-icons"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import React, {useState} from "react"
-import Header from "../../components/Header/Header"
-import Stage1 from "../../components/Stage1/Stage1"
-import Stage2 from "../../components/Stage2/Stage2"
-import styles from "./HomePage.module.scss"
+import {faLock, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import React, {useState} from "react";
+import Header from "../../components/Header/Header";
+import Stage1 from "../../components/Stage1/Stage1";
+import Stage2 from "../../components/Stage2/Stage2";
+import Stage3 from "../../components/Stage3/Stage3";
+import styles from "./HomePage.module.scss";
 
 type Stages = 1 | 2 | 3
 
 const HomePage: React.FC = () => {
 
-    const [stage, setStage] = useState<Stages>(1)
+    const [stage, setStage] = useState<Stages>(1);
 
-    const [alertOpen, setAlertOpen] = useState<boolean>(true)
+    const [countryCode, setCountryCode] = useState<string>("");
+    const [phoneNumber, setPhoneNumber] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
-    const closeAlert = () => {
-        setAlertOpen(false)
-    }
+    const [alertOpen, setAlertOpen] = useState<boolean>(true);
 
-    const [countryCode, setCountryCode] = useState<string>("")
-    const [phoneNumber, setPhoneNumber] = useState<string>("")
+    const closeAlert = () => setAlertOpen(false);
 
     const handleStage1 = (countryCode: string, phoneNumber: string) => {
-        setCountryCode(countryCode)
-        setPhoneNumber(phoneNumber)
-        setStage(2)
-    }
+        setCountryCode(countryCode);
+        setPhoneNumber(phoneNumber);
+        setStage(2);
+    };
 
-    const handleStage2 = () => {
-        setStage(3)
-    }
+    const handleStage2 = () => setStage(3);
 
-    const backToStage1 = () => {
-        setStage(1)
-    }
+    const backToStage1 = () => setStage(1);
+
+    const handleStage3 = (email: string, password: string) => {
+        setEmail(email);
+        setPassword(password);
+        alert(`Registration complete!\n${JSON.stringify({countryCode, phoneNumber, email, password})}`);
+
+        setCountryCode("");
+        setPhoneNumber("");
+        setEmail("");
+        setPassword("");
+        setStage(1);
+    };
 
     return (
         <main className={styles.home}>
@@ -48,21 +57,24 @@ const HomePage: React.FC = () => {
 
                 {stage === 1 && <Stage1 handleComplete={handleStage1}
                                         countryCode={countryCode}
-                                        phoneNumber={phoneNumber}/>}
+                                        phoneNumber={phoneNumber}/>
+                }
                 {stage === 2 && <Stage2 handleComplete={handleStage2}
-                                        countryCode={countryCode}
-                                        phone={phoneNumber}
+                                        phone={transformPhoneNumber(countryCode, phoneNumber)}
                                         backToStage1={backToStage1}/>
+                }
+                {stage === 3 && <Stage3 phone={transformPhoneNumber(countryCode, phoneNumber)}
+                                        handleComplete={handleStage3}/>
                 }
             </div>
         </main>
-    )
-}
+    );
+};
 
-export default HomePage
+export default HomePage;
 
 
-interface AlertProps {closeAlert: () => void}
+interface AlertProps {closeAlert: () => void;}
 
 const Alert = ({closeAlert}: AlertProps) => (
     <div className={styles.alert}>
@@ -74,4 +86,19 @@ const Alert = ({closeAlert}: AlertProps) => (
             <FontAwesomeIcon className={styles.crossIcon} icon={faXmark}/>
         </button>
     </div>
-)
+);
+
+export const transformPhoneNumber = (countryCode: string, phone: string) => {
+    const firstPart = phone.slice(0, 2);
+    const secondPart = phone.slice(2, 5);
+    const thirdPart = phone.slice(5, 7);
+    const fourthPart = phone.slice(7, 9);
+    const fifthPart = phone.slice(9);
+
+    return `${countryCode}`
+        + ` ${firstPart}`
+        + `${secondPart ? ` ${secondPart}` : ""}`
+        + `${thirdPart ? ` ${thirdPart}` : ""}`
+        + `${fourthPart ? ` ${fourthPart}` : ""}`
+        + `${fifthPart ? ` ${fifthPart}` : ""}`;
+};

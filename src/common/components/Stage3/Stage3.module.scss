@@ -1,0 +1,107 @@
+@import "src/assets/styles/colorPalette";
+@import "src/assets/styles/templates";
+
+.phoneBox {
+  @include fieldsetBox;
+  margin-top: 2em;
+  padding: 1em;
+
+  h2 {
+    font-family: Roboto, serif;
+    font-size: 1.125rem;
+    font-weight: normal;
+    line-height: 1.56;
+    color: $shark;
+  }
+
+  .confirmedWrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 0.125em;
+
+    .checkSign {
+      font-size: 0.875rem;
+      color: $shuttleGray;
+    }
+
+    p {
+      font-family: Poppins, serif;
+      font-size: 0.875rem;
+      line-height: 1.38;
+      margin-left: 0.25em;
+      color: $shuttleGray;
+    }
+  }
+}
+
+.lastForm {
+  margin-top: 2em;
+
+  > fieldset {
+    @include fieldsetBox;
+
+    > p {
+      display: flex;
+      flex-direction: column;
+
+      &:not(:first-child) {
+        margin-top: 2em;
+      }
+
+      label {
+        font-family: Poppins, serif;
+        font-size: 0.875rem;
+        line-height: 1.43;
+        color: $shark;
+      }
+
+      input {
+        @include input;
+        margin-top: 0.125em;
+      }
+
+      .passwordStrength {
+        font-family: Poppins, serif;
+        font-size: 0.75rem;
+        line-height: 1.33;
+        margin-top: 0.25em;
+
+        &:is(.weakPassword, .strongPassword) {
+          display: flex;
+          align-items: center;
+
+          p {
+            margin-left: 0.25em;
+          }
+        }
+
+        &.weakPassword {
+          color: red;
+        }
+
+        &.mediumPassword {
+          color: $azureRadiance;
+        }
+
+        &.strongPassword {
+          color: $emerald;
+        }
+      }
+
+      .error {
+        font-family: Poppins, serif;
+        font-size: 0.75rem;
+        line-height: 1.33;
+        margin-top: 0.25em;
+        color: red;
+      }
+    }
+  }
+
+  .submitButton {
+    @include button;
+    margin-top: 2em;
+    color: white;
+    background-color: $azureRadiance;
+  }
+}

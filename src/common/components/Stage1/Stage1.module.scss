@@ -26,6 +26,10 @@
         width: 5.5em;
         min-width: 5.5em;
         height: 100%;
+
+        > div {
+          height: 100%;
+        }
       }
 
       input {

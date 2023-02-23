@@ -5,9 +5,10 @@ import Header from "../../components/Header/Header";
 import Stage1 from "../../components/Stage1/Stage1";
 import Stage2 from "../../components/Stage2/Stage2";
 import Stage3 from "../../components/Stage3/Stage3";
+import Stage4 from "../../components/Stage4/Stage4";
 import styles from "./HomePage.module.scss";
 
-type Stages = 1 | 2 | 3
+type Stages = 1 | 2 | 3 | 4 | 5 | 6;
 
 const HomePage: React.FC = () => {
 
@@ -17,6 +18,11 @@ const HomePage: React.FC = () => {
     const [phoneNumber, setPhoneNumber] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+
+    const [firstName, setFirstName] = useState<string>("");
+    const [lastName, setLastName] = useState<string>("");
+    const [dateOfBirth, setDateOfBirth] = useState<string>("");
+    const [placeOfBirth, setPlaceOfBirth] = useState<string>("");
 
     const [alertOpen, setAlertOpen] = useState<boolean>(true);
 
@@ -35,12 +41,45 @@ const HomePage: React.FC = () => {
     const handleStage3 = (email: string, password: string) => {
         setEmail(email);
         setPassword(password);
-        alert(`Registration complete!\n${JSON.stringify({countryCode, phoneNumber, email, password})}`);
+        setStage(4);
+    };
+
+    const handleStage4 = (firstName: string, lastName: string, dateOfBirth: string, placeOfBirth: string) => {
+        setFirstName(firstName);
+        setLastName(lastName);
+        setDateOfBirth(dateOfBirth);
+        setPlaceOfBirth(placeOfBirth);
+        setStage(5);
+    };
+
+    const handleStage5 = () => setStage(6);
+
+    const handleStage6 = () => {
+        handleComplete();
+    };
+
+    const handleComplete = () => {
+        const data = {
+            countryCode,
+            phoneNumber,
+            email,
+            password,
+            firstName,
+            lastName,
+            dateOfBirth,
+            placeOfBirth,
+        };
+        alert(`Registration complete!\n${JSON.stringify(data)}`);
 
         setCountryCode("");
         setPhoneNumber("");
         setEmail("");
         setPassword("");
+        setFirstName("");
+        setLastName("");
+        setDateOfBirth("");
+        setPlaceOfBirth("");
+
         setStage(1);
     };
 
@@ -48,11 +87,9 @@ const HomePage: React.FC = () => {
         <main className={styles.home}>
             <Header stage={stage}/>
             <div className={styles.main}>
-                <h1>Registration</h1>
-                <p className={styles.desc}>
-                    Fill in the registration data. It will take a couple of minutes.<br/>
-                    All you need is a phone number and e-mail
-                </p>
+                {stage < 4 && <RegistrationHeader/>}
+                {stage >= 4 && <ProfileInfoHeader/>}
+
                 {alertOpen && <Alert closeAlert={closeAlert}/>}
 
                 {stage === 1 && <Stage1 handleComplete={handleStage1}
@@ -65,6 +102,9 @@ const HomePage: React.FC = () => {
                 }
                 {stage === 3 && <Stage3 phone={transformPhoneNumber(countryCode, phoneNumber)}
                                         handleComplete={handleStage3}/>
+                }
+                {stage === 4 && <Stage4 phone={transformPhoneNumber(countryCode, phoneNumber)}
+                                        handleComplete={handleStage4}/>
                 }
             </div>
         </main>
@@ -87,6 +127,27 @@ const Alert = ({closeAlert}: AlertProps) => (
         </button>
     </div>
 );
+
+const RegistrationHeader = () => (
+    <>
+        <h1>Registration</h1>
+        <p className={styles.desc}>
+            Fill in the registration data. It will take a couple of minutes.<br/>
+            All you need is a phone number and e-mail
+        </p>
+    </>
+);
+
+const ProfileInfoHeader = () => (
+    <>
+        <h1>Profile info</h1>
+        <p className={styles.desc}>
+            Fill in the data for profile. It will take a couple of minutes.
+            You only need a passport
+        </p>
+    </>
+);
+
 
 export const transformPhoneNumber = (countryCode: string, phone: string) => {
     const firstPart = phone.slice(0, 2);

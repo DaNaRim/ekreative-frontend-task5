@@ -1,12 +1,12 @@
-@import "../../../../assets/styles/colorPalette";
-@import "../../../../assets/styles/templates";
+@import "src/assets/styles/colorPalette";
+@import "src/assets/styles/templates";
 
 .combobox {
 
   .inputWrapper {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: fit-content;
 
     .input {
       width: 100%;
@@ -30,11 +30,10 @@
   }
 
   .options {
-    position: sticky;
+    position: absolute;
     z-index: 1000000;
     overflow-y: auto;
-    width: 100%;
-    min-width: fit-content;
+    width: fit-content;
     height: 12em;
     margin-top: 0.5em;
     padding: 0.5em 1em;

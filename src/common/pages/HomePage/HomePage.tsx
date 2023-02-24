@@ -6,6 +6,7 @@ import Stage1 from "../../components/Stage1/Stage1";
 import Stage2 from "../../components/Stage2/Stage2";
 import Stage3 from "../../components/Stage3/Stage3";
 import Stage4 from "../../components/Stage4/Stage4";
+import Stage5 from "../../components/Stage5/Stage5";
 import styles from "./HomePage.module.scss";
 
 type Stages = 1 | 2 | 3 | 4 | 5 | 6;
@@ -106,6 +107,7 @@ const HomePage: React.FC = () => {
                 {stage === 4 && <Stage4 phone={transformPhoneNumber(countryCode, phoneNumber)}
                                         handleComplete={handleStage4}/>
                 }
+                {stage === 5 && <Stage5 handleComplete={handleStage5}/>}
             </div>
         </main>
     );

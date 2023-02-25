@@ -112,7 +112,7 @@
       gap: $gap;
 
       > p {
-        width: calc(50% - $gap);
+        width: calc(50% - $gap / 2);
         margin-top: 0;
 
         .placeOfBirth {
@@ -128,6 +128,7 @@
           input {
             @include input;
             height: 2.75em;
+            padding: 0.5em 1.5em 0.5em 0.5em;
           }
         }
       }

@@ -6,7 +6,7 @@
   background: $azureRadiance;
 }
 
-.main_header {
+.mainHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -74,5 +74,24 @@
         color: $charade;
       }
     }
+  }
+}
+
+.mainHeaderMobile {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+
+  .top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .bottom {
+    margin-top: 3em;
+    display: flex;
+    align-items: center;
   }
 }

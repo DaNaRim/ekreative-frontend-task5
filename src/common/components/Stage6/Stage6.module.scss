@@ -1,0 +1,82 @@
+@import "src/assets/styles/templates";
+@import "src/assets/styles/colorPalette";
+
+.stage6 {
+  margin-top: 2em;
+
+  > fieldset {
+    @include fieldsetBox;
+
+    > h2 {
+      font-family: Poppins, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: $charade;
+    }
+
+    .desc {
+      font-family: Poppins, sans-serif;
+      font-size: 0.74rem;
+      font-weight: 300;
+      line-height: 1.33;
+      margin-top: 0.125em;
+      color: $shuttleGray;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2em;
+
+      label {
+        font-family: Poppins, sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.43;
+        color: $shark;
+      }
+
+      input {
+        @include input;
+        margin-top: 0.5em;
+      }
+
+      .city, .country {
+
+        input {
+          @include input;
+          margin-top: 0.5em;
+        }
+      }
+
+      .error {
+        font-family: Poppins, sans-serif;
+        font-size: 0.75rem;
+        font-weight: 300;
+        line-height: 1.33;
+        margin-top: 0.125em;
+        color: red;
+      }
+    }
+
+    .doubleInputWrapper {
+      display: flex;
+      gap: 2em;
+    }
+  }
+
+  .submitButton {
+    @include button;
+    margin-top: 2em;
+    color: white;
+    background-color: $azureRadiance;
+
+    span {
+      font-family: Poppins, sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      margin-left: 0.5em;
+    }
+  }
+}

@@ -7,6 +7,7 @@ import Stage2 from "../../components/Stage2/Stage2";
 import Stage3 from "../../components/Stage3/Stage3";
 import Stage4 from "../../components/Stage4/Stage4";
 import Stage5 from "../../components/Stage5/Stage5";
+import Stage6 from "../../components/Stage6/Stage6";
 import styles from "./HomePage.module.scss";
 
 type Stages = 1 | 2 | 3 | 4 | 5 | 6;
@@ -24,6 +25,12 @@ const HomePage: React.FC = () => {
     const [lastName, setLastName] = useState<string>("");
     const [dateOfBirth, setDateOfBirth] = useState<string>("");
     const [placeOfBirth, setPlaceOfBirth] = useState<string>("");
+
+    const [address, setAddress] = useState<string>("");
+    const [city, setCity] = useState<string>("");
+    const [country, setCountry] = useState<string>("");
+    const [zipCode, setZipCode] = useState<string>("");
+    const [optionalAddress, setOptionalAddress] = useState<string>("");
 
     const [alertOpen, setAlertOpen] = useState<boolean>(true);
 
@@ -55,7 +62,13 @@ const HomePage: React.FC = () => {
 
     const handleStage5 = () => setStage(6);
 
-    const handleStage6 = () => {
+    const handleStage6 = (address: string, city: string, country: string, zipCode: string, optionalAddress: string) => {
+        setAddress(address);
+        setCity(city);
+        setCountry(country);
+        setZipCode(zipCode);
+        setOptionalAddress(optionalAddress);
+
         handleComplete();
     };
 
@@ -69,6 +82,11 @@ const HomePage: React.FC = () => {
             lastName,
             dateOfBirth,
             placeOfBirth,
+            address,
+            city,
+            country,
+            zipCode,
+            optionalAddress,
         };
         alert(`Registration complete!\n${JSON.stringify(data)}`);
 
@@ -80,6 +98,11 @@ const HomePage: React.FC = () => {
         setLastName("");
         setDateOfBirth("");
         setPlaceOfBirth("");
+        setAddress("");
+        setCity("");
+        setCountry("");
+        setZipCode("");
+        setOptionalAddress("");
 
         setStage(1);
     };
@@ -108,6 +131,7 @@ const HomePage: React.FC = () => {
                                         handleComplete={handleStage4}/>
                 }
                 {stage === 5 && <Stage5 handleComplete={handleStage5}/>}
+                {stage === 6 && <Stage6 handleComplete={handleStage6}/>}
             </div>
         </main>
     );

@@ -2,6 +2,7 @@ import {faArrowRight, faCheck} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {useEffect, useMemo, useState} from "react";
 import {Controller, useForm} from "react-hook-form";
+import {CitiMap, getCitiesData} from "../../utils/cityData";
 import {Data, MyComboBox} from "../form/MyComboBox/MyComboBox";
 import styles from "./Stage4.module.scss";
 
@@ -18,40 +19,27 @@ type Stage4Props = {
     handleComplete: (firstName: string, lastName: string, dateOfBirth: string, placeOfBirth: string) => void
 }
 
-type CitiMap = {
-    [key: string]: string[] // key is country name, value is array of cities
-}
-
 const Stage4 = ({phone, handleComplete}: Stage4Props) => {
 
     const {register, control, handleSubmit, formState: {errors}} = useForm<Stage4Fields>();
 
     const [cities, setCities] = useState<CitiMap>({});
 
-    const citiesData = useMemo(async () => {
-        const response = await fetch("https://countriesnow.space/api/v0.1/countries");
-        const data = await response.json();
-
-        const citiesMap: CitiMap = {};
-        data.data.forEach((country: any) => {
-            citiesMap[country.country] = country.cities;
-        });
-        return citiesMap;
-    }, []);
-
     useEffect(() => {
-        citiesData.then((data) => setCities(data));
-    }, [citiesData]);
+        getCitiesData().then((data) => setCities(data));
+    }, []);
 
     const transformedCities = useMemo(() => {
         const result: Data[] = [];
         for (const country in cities) {
-            cities[country].forEach((city) =>
-                result.push({
-                    id: `${city}, ${country}`,
-                    value: `${city}, ${country}`,
-                    name: `${city}, ${country}`,
-                }));
+            if (cities.hasOwnProperty(country)) {
+                cities[country].forEach((city) =>
+                    result.push({
+                        id: `${city}, ${country}`,
+                        value: `${city}, ${country}`,
+                        name: `${city}, ${country}`,
+                    }));
+            }
         }
         return result;
     }, [cities]);
@@ -108,7 +96,7 @@ const Stage4 = ({phone, handleComplete}: Stage4Props) => {
                             render={({field}) => <MyComboBox {...field}
                                                              data={transformedCities}
                                                              className={styles.placeOfBirth}
-                                                             label={"Place of birth"}
+                                                             label="Place of birth"
                                                              isDisplayName={false}/>}
                         />
                         {errors.placeOfBirth?.type === "required" && (

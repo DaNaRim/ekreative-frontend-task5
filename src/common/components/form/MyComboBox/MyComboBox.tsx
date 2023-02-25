@@ -16,6 +16,7 @@ interface ComboBoxProps extends ControllerRenderProps {
     className?: string;
     isDisplayName?: boolean;
     label?: string;
+    extraOnChange?: (name: string, value: string) => void;
 }
 
 const OVERFLOW_LIMIT = 100;
@@ -23,8 +24,8 @@ const OVERFLOW_LIMIT = 100;
 export const MyComboBox = React.forwardRef<
     HTMLInputElement,
     ComboBoxProps
->((props, ref) => {
-    const {data, className, isDisplayName = true, label} = props;
+>((props) => {
+    const {data, className, isDisplayName = true, label, extraOnChange} = props;
 
     const [query, setQuery] = useState<string>("");
 
@@ -56,10 +57,18 @@ export const MyComboBox = React.forwardRef<
         setFilteredDataLength(updatedData.length);
     }, [data, isOverflow, query]);
 
+    const handleOnChange = (value: string) => {
+        props.onChange(value);
+        if (extraOnChange) {
+            const name = preparedData.find((dataEntity) => dataEntity.value === value)?.name || "";
+            extraOnChange(name, value);
+        }
+    };
+
     return (
         <Combobox
             defaultValue={props.value}
-            onChange={props.onChange}
+            onChange={handleOnChange}
             refName={props.name}
         >
             <div className={`${styles.combobox} ${className ? className : ""}`}>

@@ -8,11 +8,13 @@ import Stage3 from "../../components/Stage3/Stage3";
 import Stage4 from "../../components/Stage4/Stage4";
 import Stage5 from "../../components/Stage5/Stage5";
 import Stage6 from "../../components/Stage6/Stage6";
+import {useMobileMediaQuery} from "../../utils/ResponsiveWrappers";
 import styles from "./HomePage.module.scss";
 
 type Stages = 1 | 2 | 3 | 4 | 5 | 6;
 
 const HomePage: React.FC = () => {
+    const isMobile = useMobileMediaQuery();
 
     const [stage, setStage] = useState<Stages>(1);
 
@@ -110,7 +112,7 @@ const HomePage: React.FC = () => {
     return (
         <main className={styles.home}>
             <Header stage={stage}/>
-            <div className={styles.main}>
+            <div className={`${styles.main} ${isMobile ? styles.mainMobile : ""}`}>
                 {stage < 4 && <RegistrationHeader/>}
                 {stage >= 4 && <ProfileInfoHeader/>}
 

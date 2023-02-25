@@ -36,7 +36,7 @@ const Stage6 = ({handleComplete}: Stage6Props) => {
             if (cities.hasOwnProperty(country)) {
                 cities[country].forEach((city) =>
                     result.push({
-                        id: `${city}, ${country}`,
+                        id: String(Math.random()),
                         value: `${city}`,
                         name: `${country}`,
                     }));

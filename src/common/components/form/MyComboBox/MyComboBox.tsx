@@ -24,7 +24,7 @@ const OVERFLOW_LIMIT = 100;
 export const MyComboBox = React.forwardRef<
     HTMLInputElement,
     ComboBoxProps
->((props) => {
+>((props, ref) => {
     const {data, className, isDisplayName = true, label, extraOnChange} = props;
 
     const [query, setQuery] = useState<string>("");

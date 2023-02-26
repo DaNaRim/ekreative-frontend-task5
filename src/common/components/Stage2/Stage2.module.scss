@@ -40,7 +40,6 @@
 .codeForm {
   margin-top: 2em;
 
-
   .codeWrapper {
     display: flex;
     align-items: center;
@@ -50,6 +49,7 @@
       h2 {
         font-family: Poppins, serif;
         font-size: 0.875rem;
+        font-weight: 400;
         line-height: 1.38;
         text-align: left;
         color: $shark;
@@ -74,6 +74,7 @@
     }
 
     .sendAgain {
+      @include clearButtonStyles;
       color: $azureRadiance;
 
       span {
@@ -87,6 +88,8 @@
   }
 
   .error {
+    font-family: Poppins, serif;
+    font-size: 1rem;
     margin-top: 0.5em;
     color: red;
   }
@@ -94,5 +97,37 @@
   .submitButton {
     @include button;
     margin-top: 2em;
+  }
+}
+
+/*
+  Mobile
+ */
+
+.phoneBoxMobile {
+  padding: 1.5em;
+  border: none;
+  background-color: $aliceBlue;
+}
+
+.codeFormMobile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 1.5em;
+
+  .codeWrapper {
+    align-items: flex-start;
+    flex-direction: column;
+
+    .leftSide {
+      input {
+        width: 100%;
+      }
+    }
+
+    .sendAgain {
+      margin-top: 1em;
+    }
   }
 }

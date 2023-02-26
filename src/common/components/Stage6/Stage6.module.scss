@@ -80,3 +80,19 @@
     }
   }
 }
+
+/*
+  Mobile
+ */
+
+.stage6Mobile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 1.5em;
+
+  > fieldset {
+    padding: 0;
+    border: none;
+  }
+}

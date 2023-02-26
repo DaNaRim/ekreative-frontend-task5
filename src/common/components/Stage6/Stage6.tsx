@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {useEffect, useMemo, useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import {CitiMap, getCitiesData} from "../../utils/cityData";
+import {useMobileMediaQuery} from "../../utils/ResponsiveWrappers";
 import {Data, MyComboBox} from "../form/MyComboBox/MyComboBox";
 import styles from "./Stage6.module.scss";
 
@@ -21,6 +22,7 @@ type Stage6Props = {
 //FIXME: if country is picked and then city is picked, country updated, but in optionList active value is not updated
 
 const Stage6 = ({handleComplete}: Stage6Props) => {
+    const isMobile = useMobileMediaQuery();
 
     const {register, control, handleSubmit, getValues, setValue, formState: {errors}} = useForm<Stage6Fields>();
 
@@ -72,7 +74,8 @@ const Stage6 = ({handleComplete}: Stage6Props) => {
     };
 
     return (
-        <form className={styles.stage6} onSubmit={handleSubmit(handleStage4)}>
+        <form className={`${styles.stage6} ${isMobile ? styles.stage6Mobile : ""}`}
+              onSubmit={handleSubmit(handleStage4)}>
             <fieldset>
                 <h2>Delivery address</h2>
                 <p className={styles.desc}>Used for shipping orders</p>
@@ -124,7 +127,10 @@ const Stage6 = ({handleComplete}: Stage6Props) => {
                     </div>
                     <p className={styles.field}>
                         <label htmlFor="zipCode">Zip code</label>
-                        <input type="text" id="zipCode" {...register("zipCode", {required: true})} placeholder="10011"/>
+                        <input type="number"
+                               id="zipCode"
+                               {...register("zipCode", {required: true})}
+                               placeholder="10011"/>
                         {errors.zipCode?.type === "required" && (
                             <span className={styles.error}>Zip code is required</span>
                         )}

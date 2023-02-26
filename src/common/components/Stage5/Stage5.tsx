@@ -1,6 +1,7 @@
 import {faArrowRight, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {useMemo, useState} from "react";
+import {useMobileMediaQuery} from "../../utils/ResponsiveWrappers";
 import styles from "./Stage5.module.scss";
 
 type Socials = {
@@ -19,6 +20,7 @@ type Stage4Props = {
 const MIN_SOCIALS_TO_DISPLAY = 2;
 
 const Stage5 = ({handleComplete}: Stage4Props) => {
+    const isMobile = useMobileMediaQuery();
 
     const socialsList: Socials = useMemo(() => ({
         facebook: "",
@@ -90,7 +92,7 @@ const Stage5 = ({handleComplete}: Stage4Props) => {
     };
 
     return (
-        <form className={styles.stage5} onSubmit={handleStage4}>
+        <form className={`${styles.stage5} ${isMobile ? styles.stage5Mobile : ""}`} onSubmit={handleStage4}>
             <fieldset>
                 <h2>Social network</h2>
                 <p className={styles.desc}>Indicate the desired communication method</p>
@@ -108,7 +110,7 @@ const Stage5 = ({handleComplete}: Stage4Props) => {
                                          onSocialTypeChange={handleSocialTypeChange}
                                          onSocialValueChange={handleSocialChange}/>
                             {Object.keys(socials).length > MIN_SOCIALS_TO_DISPLAY && (
-                                <button onClick={() => handleRemoveSocial(social)}>
+                                <button type="button" onClick={() => handleRemoveSocial(social)}>
                                     <FontAwesomeIcon icon={faXmark} className={styles.crossIcon}/>
                                 </button>
                             )}

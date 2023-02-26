@@ -238,4 +238,4 @@ export const countryCodes: CountryCode[] = [
     {country: "Yemen", id: "ye", code: 967},
     {country: "Zambia", id: "zm", code: 260},
     {country: "Zimbabwe", id: "zw", code: 263},
-]
+];

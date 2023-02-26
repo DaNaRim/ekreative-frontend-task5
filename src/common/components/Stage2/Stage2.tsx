@@ -24,8 +24,8 @@ const Stage2 = ({phone, handleComplete, backToStage1}: Stage2Props) => {
     };
 
     const handleResendCode = () => {
-        alert(`Your code is ${RIGHT_CODE}`)
-    }
+        alert(`Your code is ${RIGHT_CODE}`);
+    };
 
     const handleStage2 = (data: {code: string}) => {
         if (Number(data.code) === RIGHT_CODE) {

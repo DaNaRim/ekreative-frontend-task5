@@ -78,20 +78,20 @@
 }
 
 .mainHeaderMobile {
-  padding: 1em;
   display: flex;
   flex-direction: column;
+  padding: 1em;
 
   .top {
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
   }
 
   .bottom {
-    margin-top: 3em;
     display: flex;
     align-items: center;
+    margin-top: 3em;
   }
 }

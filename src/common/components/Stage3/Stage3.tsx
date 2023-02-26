@@ -2,6 +2,7 @@ import {faCheck, faExclamationTriangle} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {ReactNode, useState} from "react";
 import {useForm} from "react-hook-form";
+import {useMobileMediaQuery} from "../../utils/ResponsiveWrappers";
 import styles from "./Stage3.module.scss";
 
 type Stage3Fields = {
@@ -21,6 +22,7 @@ enum PasswordStrength {
 }
 
 const Stage3 = ({phone, handleComplete}: Stage3Props) => {
+    const isMobile = useMobileMediaQuery();
 
     const {register, handleSubmit, setError, formState: {errors}} = useForm<Stage3Fields>();
 
@@ -67,14 +69,15 @@ const Stage3 = ({phone, handleComplete}: Stage3Props) => {
 
     return (
         <>
-            <div className={styles.phoneBox}>
+            <div className={`${styles.phoneBox} ${isMobile ? styles.phoneBoxMobile : ""}`}>
                 <h2>{phone}</h2>
                 <div className={styles.confirmedWrapper}>
                     <FontAwesomeIcon className={styles.checkSign} icon={faCheck}/>
                     <p>Number confirmed</p>
                 </div>
             </div>
-            <form className={styles.lastForm} onSubmit={handleSubmit(handleStage3)}>
+            <form className={`${styles.dataForm} ${isMobile ? styles.dataFormMobile : ""}`}
+                  onSubmit={handleSubmit(handleStage3)}>
                 <fieldset>
                     <p>
                         <label htmlFor="email">Email</label>

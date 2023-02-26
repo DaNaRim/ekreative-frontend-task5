@@ -38,14 +38,15 @@
 }
 
 @mixin button {
-  width: 8.5em;
   font-family: Poppins, serif;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
+  width: 8.5em;
+  min-width: fit-content;
   padding: 0.75em 1.5em;
+  cursor: pointer;
   border: 1px solid $silverSand;
   border-radius: 0.25em;
   background-color: white;
-  cursor: pointer;
 }

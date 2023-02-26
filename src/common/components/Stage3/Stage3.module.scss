@@ -34,7 +34,7 @@
   }
 }
 
-.lastForm {
+.dataForm {
   margin-top: 2em;
 
   > fieldset {
@@ -103,5 +103,32 @@
     margin-top: 2em;
     color: white;
     background-color: $azureRadiance;
+  }
+}
+
+/*
+  Mobile
+ */
+
+.phoneBoxMobile {
+  padding: 1em 1.5em;
+  border: none;
+  background-color: $aliceBlue;
+}
+
+.dataFormMobile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 1.5em;
+
+  > fieldset {
+    width: 100%;
+    padding: 0;
+    border: none;
+
+    p {
+
+    }
   }
 }

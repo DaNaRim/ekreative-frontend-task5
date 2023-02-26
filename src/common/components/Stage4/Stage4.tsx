@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {useEffect, useMemo, useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import {CitiMap, getCitiesData} from "../../utils/cityData";
+import {useMobileMediaQuery} from "../../utils/ResponsiveWrappers";
 import {Data, MyComboBox} from "../form/MyComboBox/MyComboBox";
 import styles from "./Stage4.module.scss";
 
@@ -20,6 +21,7 @@ type Stage4Props = {
 }
 
 const Stage4 = ({phone, handleComplete}: Stage4Props) => {
+    const isMobile = useMobileMediaQuery();
 
     const {register, control, handleSubmit, formState: {errors}} = useForm<Stage4Fields>();
 
@@ -49,7 +51,8 @@ const Stage4 = ({phone, handleComplete}: Stage4Props) => {
     };
 
     return (
-        <form className={styles.stage4} onSubmit={handleSubmit(handleStage4)}>
+        <form className={`${styles.stage4} ${isMobile ? styles.stage4Mobile : ""}`}
+              onSubmit={handleSubmit(handleStage4)}>
             <div className={styles.termsOfUseAgreement}>
                 <div className={styles.termsWrapper}>
                     <input type="checkbox"

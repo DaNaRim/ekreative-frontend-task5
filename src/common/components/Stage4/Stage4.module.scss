@@ -170,3 +170,36 @@
   }
 }
 
+.stage4Mobile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .termsOfUseAgreement {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  > fieldset {
+    width: 100%;
+    padding: 1em;
+    border: none;
+
+    .doubleInputWrapper {
+      flex-direction: column;
+
+      > p {
+        width: 100%;
+      }
+    }
+  }
+
+  .phoneBox {
+    width: 100%;
+    padding: 1em 1.5em;
+    border: none;
+    background-color: $aliceBlue;
+  }
+}
+

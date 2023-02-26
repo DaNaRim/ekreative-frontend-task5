@@ -52,3 +52,15 @@
   }
 }
 
+.stage1Mobile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+
+  .phoneSet {
+    padding: 0 1.5em;
+    border: none;
+  }
+}
+
